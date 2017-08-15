@@ -45,6 +45,7 @@ function game() {
 
     if(ax==px && ay==py) {
         tail++;
+        document.getElementById("score").innerHTML = tail;
         ax=Math.floor(Math.random()*tc);
         ay=Math.floor(Math.random()*tc);
     }
@@ -68,3 +69,6 @@ function keyPush(evt) {
     }
 }
 </script>
+<body>
+  <p id="score"></p>
+</body>
