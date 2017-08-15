@@ -1,3 +1,20 @@
+<style>
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
+
+p {
+  text-align: center;
+
+}
+</style>
+<body>
+<p>High Score: <span id="high_score">0</span></p>
 <canvas id="gc" width="400" height="400"></canvas>
 <script>
 window.onload=function() {
@@ -5,7 +22,7 @@ window.onload=function() {
     ctx=canv.getContext("2d");
     document.addEventListener("keydown",keyPush);
     setInterval(game,1000/15);
-
+    high_score = 0;
 }
 px=py=10;
 gs=tc=20;
@@ -36,6 +53,8 @@ function game() {
         ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
         if(trail[i].x==px && trail[i].y==py) {
             tail = 5;
+            document.getElementById("score").innerHTML = tail - 5;
+
         }
     }
     trail.push({x:px,y:py});
@@ -45,7 +64,12 @@ function game() {
 
     if(ax==px && ay==py) {
         tail++;
-        document.getElementById("score").innerHTML = tail;
+        document.getElementById("score").innerHTML = tail - 5;
+          if((tail-5) > high_score)
+            {
+              document.getElementById("high_score").innerHTML = tail - 5;
+              high_score = tail -5;
+            }
         ax=Math.floor(Math.random()*tc);
         ay=Math.floor(Math.random()*tc);
     }
@@ -69,6 +93,6 @@ function keyPush(evt) {
     }
 }
 </script>
-<body>
-  <p id="score"></p>
+<p>Current Score: <span id="score">0</span></p>
+
 </body>
